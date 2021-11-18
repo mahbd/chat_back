@@ -10,10 +10,9 @@
 <input id="chat-message-submit" type="button" value="Send">
 
 <script>
+    const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
     const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/ws/'
+        protocol + window.location.host + "/ws/"
     );
 
     chatSocket.onmessage = function (e) {

@@ -18,7 +18,7 @@ def generate_random_string(length=20):
     return ''.join(random.choice(string.ascii_letters) for _ in range(length))
 
 
-class ActiveChannels(models.Model):
+class ActiveChannel(models.Model):
     channel = models.CharField(max_length=100)
     info = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -33,6 +33,15 @@ class WSAuth(models.Model):
     token = models.CharField(default=generate_random_string, max_length=31)
     valid_till = models.DateTimeField(default=get_valid_till)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+
+class ChatRoom(models.Model):
+    chat_name = models.CharField(max_length=100)
+    users = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

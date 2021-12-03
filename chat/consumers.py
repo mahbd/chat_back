@@ -113,5 +113,6 @@ def authenticate_user(event_obj: dict, channel_name: str) -> User | str:
     ws_auth_obj = WSAuth.objects.get(token=ws_token)
     if ws_auth_obj.valid_till < timezone.now():
         return "Token validity expired"
-    ActiveChannel.objects.create(channel=channel_name, info=ws_auth_obj.info, user=ws_auth_obj.user)
+    ActiveChannel.objects.create(
+        channel=channel_name, info=ws_auth_obj.info, user=ws_auth_obj.user)
     return ws_auth_obj.user

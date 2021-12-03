@@ -21,7 +21,8 @@ def generate_random_string(length=20):
 class ActiveChannel(models.Model):
     channel = models.CharField(max_length=100)
     info = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -32,7 +33,8 @@ class WSAuth(models.Model):
     info = models.TextField()
     token = models.CharField(default=generate_random_string, max_length=31)
     valid_till = models.DateTimeField(default=get_valid_till)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -40,7 +42,8 @@ class WSAuth(models.Model):
 
 
 class ChatRoom(models.Model):
-    chat_name = models.CharField(max_length=100)
+    chat_name = models.CharField(max_length=100, unique=True, blank=True,
+                                 default=generate_random_string, null=True)
     users = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
 

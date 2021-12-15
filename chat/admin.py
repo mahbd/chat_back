@@ -1,10 +1,18 @@
 from django.contrib import admin
 
-from .models import ChatRoom
+from .models import ChatRoom, WSAuth, ActiveChannel
 
 
 @admin.register(ChatRoom)
 class ChatRoomAdmin(admin.ModelAdmin):
     pass
 
-# Register your models here.
+
+@admin.register(WSAuth)
+class WSAuthAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ActiveChannel)
+class ActiveChannelAdmin(admin.ModelAdmin):
+    pass
